@@ -1,0 +1,14 @@
+*.DS_Store
+*.o
+*.a
+*ltl2ba
+*nanotrav
+*provelines
+*.cpp
+*.txt
+*.tmp
+*.xml
+spin*
+*dSym*
+*.details
+*.output

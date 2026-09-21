@@ -1,0 +1,93 @@
+Copyright (c) 2010-2013 Andreas Classen, Maxime Cordy
+
+ProVeLines is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+---[ Documentation ]-------------------------------------------------------
+
+ProVeLines is only distributed in source form.  It compiles and runs on Linux 
+and Mac OS X; we haven't tested it under Windows.  
+
+To get ProVeLines running on your computer, please follow the following steps. 
+Note that ProVeLines is meant to run under Linux and Mac OS X only. We do not 
+guarantee compatibility with other operating systems and do not provide support
+for them.
+
+   1. Go to the ProVeLines/src directory.
+   2. Open configure.h and uncomment the lines related to the features you want
+      to include to ProVeLines.
+   3. If you have enabled the REAL_TIME option:
+      i. Go to the ProVeLines/src/lib/UPPAAL-dbm/modules directory.
+      ii. Follow the instructions written in the README file to compile Z3. You
+          need boost for this. If the make command fails, open makefile and 
+          make sure that the seventh line is "export AR := ar".
+      iii. Go back to the ProVeLines/src directory.
+   4. If you have enabled the NUMERIC_FEATURES option:
+      i. Go to the ProVeLines/src/lib/z3 directory.
+      ii. Follow the instructions written in the README file to compile Z3. You
+          need wine and autoconf for this.
+      iii. Copy libz3.dylib into the ProVeLines/src/lib/z3 directory.
+      iv. Go back to the ProVeLines/src directory.
+   5. Open build.sh and look for the lines beginning by "BOOL=". Uncomment only
+      the line related to the data structure you want ProVeLines to use. Note 
+      that if you enabled NUMERIC_FEATURES then you must make sure that the 
+      Z3-related line is uncommented.
+   6. Execute build.sh.
+
+You’re done! You may now execute ProVeLines. If you enabled MULTI-FEATURES, you 
+must first execute the following: 
+   export DYLD_LIBRARY_PATH=./lib/z3:$DYLD_LIBRARY_PATH
+
+Examples are contained in the "examples" folder. More info can 
+be found on the ProVeLines website: www.info.fundp.ac.be/fts/provelines.
+
+
+---[ Contact ]-------------------------------------------------------------
+
+ - Maxime Cordy: mcr@info.fundp.ac.be
+ - Andreas Classen: acs@info.fundp.ac.be and www.classen.be
+ - ProVeLines Website: www.info.fundp.ac.be/fts/provelines
+ - University of Namur: www.fundp.ac.be
+ - Faculty of Computer Science, University of Namur: www.info.fundp.ac.be
+
+
+---[ Third-party libraries used ]------------------------------------------
+
+ProVeLines was developed by Andreas Classen and Maxime Cordy at the University
+of Namur, Belgium.  It makes use of the following 3rd-party components:
+
+ - SPIN's Yacc grammar, Copyright (c) 1989-2003, Lucent Technologies, 
+   Bell Laboratories, written by Gerard J. Holzmann, License included.
+ - Hashtable, Copyright (c) 2002, 2004 Christopher Clark, BSD License.
+ - CUDD, Copyright (c) 1995-2004, University of Colorado, BSD License.
+ - lookup3.c, 2006, Bob Jenkins, Public Domain.
+ - Judy, Copyright (c) 2004 Doug Baskins, LGPL.
+ - LTL2BA, Copyright (c) 2007 Denis Oddoux and Paul Gastin, GPL.
+ - MiniSat, Copyright (c) 2003-2006, Niklas Een, Niklas Sorensson,
+            Copyright (c) 2007-2010  Niklas Sorensson, License included.
+ - rngs.c, 1998, Steve Park and Dave Geyer, License unclear.
+ - TVL Library, Copyright (c) 2010, University of Namur
+ - Z3, Copyright (c) 2010, Microsoft Research, License included.	
+ - DBM, Copyright (c) 1997-2011, Uppsala Universitet and 
+   Aalborg University, GPL. 
+
+---[ Acknowledgements ]----------------------------------------------------
+
+ProVeLines is sponsored by the Faculty of Computer Science, University of Namur
+(5000 Namur, Belgium) and by the belgian FRS-FNRS (National Fund for
+Scientific Research, 1000 Brussels, Belgium).
+
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
