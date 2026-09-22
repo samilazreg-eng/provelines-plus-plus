@@ -13,15 +13,26 @@ else
 fi;
 cd ..
 
-# The default ProVeLines configuration below uses CUDD. MiniSat remains in the
-# recovered source tree, but it is not part of this build path.
+cd ./lib/minisat/
+export MROOT=..
+cd core
+make libs
+cd ..
+cd ..
+cd ..
 
-make -C ./lib/ltl2ba clean
-make -C ./lib/ltl2ba
+cd ./lib/ltl2ba/
+make
+cd ..
+cd ..
 
-# ProVeLines links the CUDD libraries, not the nanotrav utility program.
-make -C ./lib/cudd DIRS="cudd dddmp mtr st util epd" build
-mv ./lib/cudd/util/libutil.a ./lib/cudd/util/libcuddutil.a
+cd ./lib/cudd/
+make
+cd ./util/
+mv libutil.a libcuddutil.a
+cd ..
+cd ..
+cd ..
 
 
 #############################
