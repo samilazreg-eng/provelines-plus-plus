@@ -1,1 +1,1 @@
-../cudd/cuddInt.h
+#include "../cudd/cuddInt.h"

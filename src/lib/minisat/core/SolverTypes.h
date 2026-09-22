@@ -42,7 +42,6 @@ namespace Minisat {
 typedef int Var;
 #define var_Undef (-1)
 
-
 struct Lit {
     int     x;
 

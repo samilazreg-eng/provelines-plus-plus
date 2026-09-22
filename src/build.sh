@@ -1,5 +1,6 @@
-clear
-clear
+#!/usr/bin/env bash
+
+set -e
 
 cd ./parser/
 if which flex &> /dev/null && which bison &> /dev/null; then
@@ -15,7 +16,9 @@ cd ..
 cd ./lib/minisat/
 export MROOT=..
 cd core
-make libs
+if ! make libs; then
+	echo "Warning: MiniSat did not build; continuing with the default CUDD backend." >&2
+fi
 cd ..
 cd ..
 cd ..

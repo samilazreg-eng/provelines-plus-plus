@@ -95,6 +95,7 @@ extern void * _handshake_transit;
 
 #ifdef PROFILER
 	#include <time.h>
+	#include <sys/time.h>
 
 	struct profilerData_ {
 		char* name;
@@ -140,4 +141,3 @@ extern void * _handshake_transit;
 	#define PROFILER_CRITICAL(var) 0
 	#define PROFILER_REPORT(var)
 #endif
-

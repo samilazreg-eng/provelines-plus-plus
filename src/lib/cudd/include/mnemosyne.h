@@ -1,1 +1,1 @@
-../mnemosyne/mnemosyne.h
+#include "../mnemosyne/mnemosyne.h"
