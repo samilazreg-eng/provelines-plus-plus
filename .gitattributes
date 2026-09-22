@@ -1,0 +1,9 @@
+# Shell entry points must retain LF endings for Linux and WSL, even when Git for
+# Windows is configured with core.autocrlf=true.
+*.sh text eol=lf
+configure text eol=lf
+install-sh text eol=lf
+config.guess text eol=lf
+config.sub text eol=lf
+compile text eol=lf
+depcomp text eol=lf
