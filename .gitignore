@@ -4,8 +4,8 @@
 /src/lib/ltl2ba/ltl2ba
 /src/lib/cudd/nanotrav/nanotrav
 /src/provelines
-*.cpp
-*.txt
+# Preprocessed fPromela input, not third-party C++ sources.
+/src/__workingfile*.cpp
 *.tmp
 *.xml
 spin*
