@@ -272,6 +272,10 @@ ptState stateCreateInitial(ptSymTabNode globalSymTab, ptMTypeNode mtypes) {
 	newState->features = getTrue();
 	newState->never = NULL;
 	newState->chanRefs = NULL;
+#ifdef CLOCK
+	newState->zone = zoneResetAll(initClockZone());
+	newState->invariant = NULL;
+#endif
     
     // time
     newState->time = 0;
@@ -518,7 +522,13 @@ void stateDestroy(ptState state, byte keepPayloadAndFeatures) {
 		if(!keepPayloadAndFeatures) {
 			destroyBool(state->features);
 			free(state->payload);
+#ifdef CLOCK
+			zoneDestroy(state->zone);
+#endif
 		}
+#ifdef CLOCK
+		if(state->invariant) zoneDestroy(state->invariant);
+#endif
 		free(state);
 	}
 }
@@ -792,6 +802,10 @@ ptState stateDuplicate(ptState state) {
 	copy->features = NULL; // see function description
 	copy->never = stateMasksDuplicate(state->never);
 	copy->chanRefs = chanRefsDuplicate(state->chanRefs);
+#ifdef CLOCK
+	copy->zone = zoneCopy(state->zone);
+	copy->invariant = NULL;
+#endif
 
     // time
     copy->time = state->time;

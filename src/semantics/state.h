@@ -1,3 +1,7 @@
+#ifdef CLOCK
+#include "clockZone.h"
+#endif
+
 /*
  * ENCODING OF STATES
  * * * * * * * * * * * * * * * * * * * * * * * *
@@ -75,6 +79,10 @@ struct state_ {
 								// by the functions that change states, it is only updated in checking.c.
 
 	ptBoolFct features;			// Boolean formula representing the products in which the state can be reached.
+#ifdef CLOCK
+	ptClockZone zone;			// Reachable clock valuations (not stored in the payload).
+	ptClockZone invariant;		// Location invariant; not part of discrete-state identity.
+#endif
     int time;                   // The global time at which the state has been reached
     int cost;
     int qualityLoss;
