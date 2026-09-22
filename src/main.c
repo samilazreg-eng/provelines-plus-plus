@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include <sys/time.h>
 #include "error.h"
 #include "main.h"
 #include "list.h"

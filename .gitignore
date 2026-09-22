@@ -1,7 +1,6 @@
 *.DS_Store
 *.o
 *.a
-*ltl2ba
 *nanotrav
 *provelines
 *.cpp
