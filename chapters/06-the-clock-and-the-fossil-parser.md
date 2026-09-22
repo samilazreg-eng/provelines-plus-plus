@@ -44,3 +44,17 @@ then trace a bounded `E F` formula from parsing through an actual checking
 algorithm. Only after the one-unit and five-unit products produce distinct
 clocked results can we call this route working. For now, the garage contains
 the parts and an old dashboard. We still need to connect the engine.
+
+## First reanimation
+
+We have now restored the historical `spec E F (<= N) ...` and
+`while (expr) wait` productions to the active parser. A CLOCK build parses
+the literal `while (c < 5) wait` probe with the optional `Formal` TVL model,
+then stops explicitly: the zone-based checker is not connected. The default
+CORA build still compiles. This is a parser milestone, not a TCTL verdict.
+
+The old execution code also makes the wording important: `while (c < 5)
+wait` is an invariant on a location, not an instruction to sleep for five
+units. It does not by itself force the following assignment to happen at
+time five. That semantic question is our next test once the zone state and
+transitions are restored.
