@@ -1,13 +1,13 @@
 *.DS_Store
 *.o
 *.a
-*nanotrav
-*provelines
+/src/lib/ltl2ba/ltl2ba
+/src/lib/cudd/nanotrav/nanotrav
+/src/provelines
 *.cpp
 *.txt
 *.tmp
 *.xml
 spin*
-*dSym*
 *.details
 *.output
