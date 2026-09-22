@@ -1,14 +1,14 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Inc.
 
-   This program is free software; you can redistribute it and/or modify
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,9 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -33,109 +31,131 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Tokens.  */
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
+#ifndef YY_YY_Y_TAB_H_INCLUDED
+# define YY_YY_Y_TAB_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     CONST = 258,
-     TYPE = 259,
-     IF = 260,
-     DO = 261,
-     NAME = 262,
-     UNAME = 263,
-     PNAME = 264,
-     INAME = 265,
-     STRING = 266,
-     ASSERT = 267,
-     PRINT = 268,
-     PRINTM = 269,
-     C_CODE = 270,
-     C_DECL = 271,
-     C_EXPR = 272,
-     C_STATE = 273,
-     C_TRACK = 274,
-     RUN = 275,
-     LEN = 276,
-     ENABLED = 277,
-     EVAL = 278,
-     PC_VAL = 279,
-     TYPEDEF = 280,
-     MTYPE = 281,
-     INLINE = 282,
-     LABEL = 283,
-     OF = 284,
-     GOTO = 285,
-     BREAK = 286,
-     ELSE = 287,
-     SEMI = 288,
-     FI = 289,
-     OD = 290,
-     SEP = 291,
-     ATOMIC = 292,
-     NON_ATOMIC = 293,
-     D_STEP = 294,
-     UNLESS = 295,
-     TIMEOUT = 296,
-     NONPROGRESS = 297,
-     ACTIVE = 298,
-     PROCTYPE = 299,
-     D_PROCTYPE = 300,
-     HIDDEN = 301,
-     SHOW = 302,
-     ISLOCAL = 303,
-     PRIORITY = 304,
-     PROVIDED = 305,
-     FULL = 306,
-     EMPTY = 307,
-     NFULL = 308,
-     NEMPTY = 309,
-     XU = 310,
-     CLAIM = 311,
-     TRACE = 312,
-     INIT = 313,
-     WHILE = 314,
-     WHEN = 315,
-     WAIT = 316,
-     RESET = 317,
-     THEN = 318,
-     SPEC = 319,
-     EVENTUALLY = 320,
-     ALWAYS = 321,
-     GLOBALLY = 322,
-     FINALLY = 323,
-     CHECK = 324,
-     WITHIN = 325,
-     MINIMIZE = 326,
-     TIME = 327,
-     COST = 328,
-     QUALITY = 329,
-     ASGN = 330,
-     R_RCV = 331,
-     RCV = 332,
-     O_SND = 333,
-     SND = 334,
-     OR = 335,
-     AND = 336,
-     NE = 337,
-     EQ = 338,
-     LE = 339,
-     GE = 340,
-     LT = 341,
-     GT = 342,
-     RSHIFT = 343,
-     LSHIFT = 344,
-     DECR = 345,
-     INCR = 346,
-     CONTEXT = 347,
-     COUNT = 348,
-     NEG = 349,
-     UMIN = 350,
-     DOT = 351
-   };
+  enum yytokentype
+  {
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    CONST = 258,                   /* CONST  */
+    TYPE = 259,                    /* TYPE  */
+    IF = 260,                      /* IF  */
+    DO = 261,                      /* DO  */
+    NAME = 262,                    /* NAME  */
+    UNAME = 263,                   /* UNAME  */
+    PNAME = 264,                   /* PNAME  */
+    INAME = 265,                   /* INAME  */
+    STRING = 266,                  /* STRING  */
+    ASSERT = 267,                  /* ASSERT  */
+    PRINT = 268,                   /* PRINT  */
+    PRINTM = 269,                  /* PRINTM  */
+    C_CODE = 270,                  /* C_CODE  */
+    C_DECL = 271,                  /* C_DECL  */
+    C_EXPR = 272,                  /* C_EXPR  */
+    C_STATE = 273,                 /* C_STATE  */
+    C_TRACK = 274,                 /* C_TRACK  */
+    RUN = 275,                     /* RUN  */
+    LEN = 276,                     /* LEN  */
+    ENABLED = 277,                 /* ENABLED  */
+    EVAL = 278,                    /* EVAL  */
+    PC_VAL = 279,                  /* PC_VAL  */
+    TYPEDEF = 280,                 /* TYPEDEF  */
+    MTYPE = 281,                   /* MTYPE  */
+    INLINE = 282,                  /* INLINE  */
+    LABEL = 283,                   /* LABEL  */
+    OF = 284,                      /* OF  */
+    GOTO = 285,                    /* GOTO  */
+    BREAK = 286,                   /* BREAK  */
+    ELSE = 287,                    /* ELSE  */
+    SEMI = 288,                    /* SEMI  */
+    FI = 289,                      /* FI  */
+    OD = 290,                      /* OD  */
+    SEP = 291,                     /* SEP  */
+    ATOMIC = 292,                  /* ATOMIC  */
+    NON_ATOMIC = 293,              /* NON_ATOMIC  */
+    D_STEP = 294,                  /* D_STEP  */
+    UNLESS = 295,                  /* UNLESS  */
+    TIMEOUT = 296,                 /* TIMEOUT  */
+    NONPROGRESS = 297,             /* NONPROGRESS  */
+    ACTIVE = 298,                  /* ACTIVE  */
+    PROCTYPE = 299,                /* PROCTYPE  */
+    D_PROCTYPE = 300,              /* D_PROCTYPE  */
+    HIDDEN = 301,                  /* HIDDEN  */
+    SHOW = 302,                    /* SHOW  */
+    ISLOCAL = 303,                 /* ISLOCAL  */
+    PRIORITY = 304,                /* PRIORITY  */
+    PROVIDED = 305,                /* PROVIDED  */
+    FULL = 306,                    /* FULL  */
+    EMPTY = 307,                   /* EMPTY  */
+    NFULL = 308,                   /* NFULL  */
+    NEMPTY = 309,                  /* NEMPTY  */
+    XU = 310,                      /* XU  */
+    CLAIM = 311,                   /* CLAIM  */
+    TRACE = 312,                   /* TRACE  */
+    INIT = 313,                    /* INIT  */
+    WHILE = 314,                   /* WHILE  */
+    WHEN = 315,                    /* WHEN  */
+    WAIT = 316,                    /* WAIT  */
+    RESET = 317,                   /* RESET  */
+    THEN = 318,                    /* THEN  */
+    SPEC = 319,                    /* SPEC  */
+    EVENTUALLY = 320,              /* EVENTUALLY  */
+    ALWAYS = 321,                  /* ALWAYS  */
+    GLOBALLY = 322,                /* GLOBALLY  */
+    FINALLY = 323,                 /* FINALLY  */
+    CHECK = 324,                   /* CHECK  */
+    WITHIN = 325,                  /* WITHIN  */
+    MINIMIZE = 326,                /* MINIMIZE  */
+    TIME = 327,                    /* TIME  */
+    COST = 328,                    /* COST  */
+    QUALITY = 329,                 /* QUALITY  */
+    ASGN = 330,                    /* ASGN  */
+    SND = 331,                     /* SND  */
+    O_SND = 332,                   /* O_SND  */
+    RCV = 333,                     /* RCV  */
+    R_RCV = 334,                   /* R_RCV  */
+    OR = 335,                      /* OR  */
+    AND = 336,                     /* AND  */
+    EQ = 337,                      /* EQ  */
+    NE = 338,                      /* NE  */
+    GT = 339,                      /* GT  */
+    LT = 340,                      /* LT  */
+    GE = 341,                      /* GE  */
+    LE = 342,                      /* LE  */
+    LSHIFT = 343,                  /* LSHIFT  */
+    RSHIFT = 344,                  /* RSHIFT  */
+    INCR = 345,                    /* INCR  */
+    DECR = 346,                    /* DECR  */
+    UMIN = 347,                    /* UMIN  */
+    NEG = 348,                     /* NEG  */
+    COUNT = 349,                   /* COUNT  */
+    CONTEXT = 350,                 /* CONTEXT  */
+    DOT = 351                      /* DOT  */
+  };
+  typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Tokens.  */
+/* Token kinds.  */
+#define YYEMPTY -2
+#define YYEOF 0
+#define YYerror 256
+#define YYUNDEF 257
 #define CONST 258
 #define TYPE 259
 #define IF 260
@@ -209,35 +229,34 @@
 #define COST 328
 #define QUALITY 329
 #define ASGN 330
-#define R_RCV 331
-#define RCV 332
-#define O_SND 333
-#define SND 334
+#define SND 331
+#define O_SND 332
+#define RCV 333
+#define R_RCV 334
 #define OR 335
 #define AND 336
-#define NE 337
-#define EQ 338
-#define LE 339
-#define GE 340
-#define LT 341
-#define GT 342
-#define RSHIFT 343
-#define LSHIFT 344
-#define DECR 345
-#define INCR 346
-#define CONTEXT 347
-#define COUNT 348
-#define NEG 349
-#define UMIN 350
+#define EQ 337
+#define NE 338
+#define GT 339
+#define LT 340
+#define GE 341
+#define LE 342
+#define LSHIFT 343
+#define RSHIFT 344
+#define INCR 345
+#define DECR 346
+#define UMIN 347
+#define NEG 348
+#define COUNT 349
+#define CONTEXT 350
 #define DOT 351
 
-
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
+union YYSTYPE
+{
 #line 39 "promela.y"
-{ 
+ 
 	int       				iVal;
 	char*    				sVal;
 	tDataTuple				pDataVal;
@@ -246,14 +265,19 @@ typedef union YYSTYPE
 	struct fsm_*			pFsmVal;
 	struct list_ *			pList;
     struct _costFormula *    pCostFormula;
-}
-/* Line 1529 of yacc.c.  */
-#line 252 "y.tab.h"
-	YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
+
+#line 270 "y.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
 #endif
 
 
 
+
+int yyparse (struct symTabNode_* * globalSymTab, struct mTypeNode_* * mtypes, void ** property);
+
+
+#endif /* !YY_YY_Y_TAB_H_INCLUDED  */

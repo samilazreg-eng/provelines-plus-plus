@@ -307,7 +307,10 @@ int main(int argc, char *argv[]) {
 	if(yyin == NULL) failure("Could not open temporary working file (%s).\n", argv[argc - 1]);
 	init_lex();
 
-	if(yyparse(&globalSymTab, &mtypes, &costFormula) != 0) printf("Syntax error; aborting..\n");
+	void *parsedProperty = NULL;
+	int parseResult = yyparse(&globalSymTab, &mtypes, &parsedProperty);
+	costFormula = parsedProperty;
+	if(parseResult != 0) printf("Syntax error; aborting..\n");
 	else {
 #ifdef DEBUG
 		printf("Parsed.\n");

@@ -343,9 +343,11 @@ one_decl: vis TYPE var_list						{	ptSymTabNode cur = $3;
 													while(cur != NULL) {
 														// If type != 0, then the var is a T_CHAN
 														if(cur->type == 0) cur->type = $2;
+#ifndef CLOCK
 														if(cur->type == T_CLOCK) {
 															yyerror("Clocks can only be declared when the CLOCK option is enabled.");
 														}
+#endif
 														cur = cur->next;
 													}
 													$$ = $3;
