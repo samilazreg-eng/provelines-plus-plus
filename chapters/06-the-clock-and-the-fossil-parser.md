@@ -58,3 +58,10 @@ wait` is an invariant on a location, not an instruction to sleep for five
 units. It does not by itself force the following assignment to happen at
 time five. That semantic question is our next test once the zone state and
 transitions are restored.
+
+STC already kept `zone` and `invariant` in `semantics/state` under `CLOCK`.
+We have carried that state lifecycle into CORA: initialise/reset the zone,
+copy it with the state, and release it on destruction. Both default and
+CLOCK builds compile, and the earlier CLOCK smoke model still starts.
+This recovers the container for clock valuations; transitions do not yet
+update it and the bounded `E F` checker remains disconnected.
