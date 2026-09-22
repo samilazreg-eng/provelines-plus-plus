@@ -72,7 +72,7 @@ REALTIME=""
 #REALTIME="wrapper/time/clockZone-dbm.c wrapper/time/federation.c -L./lib/UPPAAL-dbm/modules/lib -ldbm -lbase -ldebug -lhash -lio"
 
 
-gcc -fgnu89-inline -o provelines main.c \
+gcc -std=gnu99 -fgnu89-inline -Wno-error=implicit-function-declaration -o provelines main.c \
 	parser/lex.yy.c \
 	parser/y.tab.c \
 	automata/symbols.c \
