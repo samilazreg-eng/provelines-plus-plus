@@ -42,14 +42,11 @@ namespace Minisat {
 typedef int Var;
 #define var_Undef (-1)
 
-struct Lit;
-inline Lit mkLit(Var var, bool sign = false);
-
 struct Lit {
     int     x;
 
     // Use this as a constructor:
-    friend Lit mkLit(Var var, bool sign);
+    friend Lit mkLit(Var var, bool sign = false);
 
     bool operator == (Lit p) const { return x == p.x; }
     bool operator != (Lit p) const { return x != p.x; }
