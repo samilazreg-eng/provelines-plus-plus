@@ -1,5 +1,6 @@
-clear
-clear
+#!/usr/bin/env bash
+
+set -e
 
 cd ./parser/
 if which flex &> /dev/null && which bison &> /dev/null; then
@@ -12,26 +13,15 @@ else
 fi;
 cd ..
 
-cd ./lib/minisat/
-export MROOT=..
-cd core
-make libs
-cd ..
-cd ..
-cd ..
+# The default ProVeLines configuration below uses CUDD. MiniSat remains in the
+# recovered source tree, but it is not part of this build path.
 
-cd ./lib/ltl2ba/
-make
-cd ..
-cd ..
+make -C ./lib/ltl2ba clean
+make -C ./lib/ltl2ba
 
-cd ./lib/cudd/
-make
-cd ./util/
-mv libutil.a libcuddutil.a
-cd ..
-cd ..
-cd ..
+# ProVeLines links the CUDD libraries, not the nanotrav utility program.
+make -C ./lib/cudd DIRS="cudd dddmp mtr st util epd" build
+mv ./lib/cudd/util/libutil.a ./lib/cudd/util/libcuddutil.a
 
 
 #############################
