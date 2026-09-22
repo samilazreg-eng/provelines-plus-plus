@@ -151,111 +151,12 @@ extern int yydebug;
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
-#define CONST 258
-#define TYPE 259
-#define IF 260
-#define DO 261
-#define NAME 262
-#define UNAME 263
-#define PNAME 264
-#define INAME 265
-#define STRING 266
-#define ASSERT 267
-#define PRINT 268
-#define PRINTM 269
-#define C_CODE 270
-#define C_DECL 271
-#define C_EXPR 272
-#define C_STATE 273
-#define C_TRACK 274
-#define RUN 275
-#define LEN 276
-#define ENABLED 277
-#define EVAL 278
-#define PC_VAL 279
-#define TYPEDEF 280
-#define MTYPE 281
-#define INLINE 282
-#define LABEL 283
-#define OF 284
-#define GOTO 285
-#define BREAK 286
-#define ELSE 287
-#define SEMI 288
-#define FI 289
-#define OD 290
-#define SEP 291
-#define ATOMIC 292
-#define NON_ATOMIC 293
-#define D_STEP 294
-#define UNLESS 295
-#define TIMEOUT 296
-#define NONPROGRESS 297
-#define ACTIVE 298
-#define PROCTYPE 299
-#define D_PROCTYPE 300
-#define HIDDEN 301
-#define SHOW 302
-#define ISLOCAL 303
-#define PRIORITY 304
-#define PROVIDED 305
-#define FULL 306
-#define EMPTY 307
-#define NFULL 308
-#define NEMPTY 309
-#define XU 310
-#define CLAIM 311
-#define TRACE 312
-#define INIT 313
-#define WHILE 314
-#define WHEN 315
-#define WAIT 316
-#define RESET 317
-#define THEN 318
-#define SPEC 319
-#define EVENTUALLY 320
-#define ALWAYS 321
-#define GLOBALLY 322
-#define FINALLY 323
-#define CHECK 324
-#define WITHIN 325
-#define MINIMIZE 326
-#define TIME 327
-#define COST 328
-#define QUALITY 329
-#define ASGN 330
-#define SND 331
-#define O_SND 332
-#define RCV 333
-#define R_RCV 334
-#define OR 335
-#define AND 336
-#define EQ 337
-#define NE 338
-#define GT 339
-#define LT 340
-#define GE 341
-#define LE 342
-#define LSHIFT 343
-#define RSHIFT 344
-#define INCR 345
-#define DECR 346
-#define UMIN 347
-#define NEG 348
-#define COUNT 349
-#define CONTEXT 350
-#define DOT 351
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 39 "promela.y"
+#line 44 "promela.y"
  
 	int       				iVal;
 	char*    				sVal;
@@ -265,8 +166,9 @@ union YYSTYPE
 	struct fsm_*			pFsmVal;
 	struct list_ *			pList;
     struct _costFormula *    pCostFormula;
+    struct _tctlFormula *    pTctlFormula;
 
-#line 270 "y.tab.h"
+#line 172 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -23,6 +23,11 @@
 #include "symbols.h"
 #include "costFormula.h"
 #include "automata.h"
+#ifdef CLOCK
+#include "clockZone.h"
+#include "tctl.h"
+static ptList _clocks = NULL;
+#endif
 
 // extern - lex
 extern int nbrLines;
@@ -45,6 +50,7 @@ extern int nbrLines;
 	struct fsm_*			pFsmVal;
 	struct list_ *			pList;
     struct _costFormula *    pCostFormula;
+    struct _tctlFormula *    pTctlFormula;
 }
 
 %token <iVal> CONST TYPE IF DO
@@ -56,6 +62,7 @@ extern int nbrLines;
 %type  <pFsmVal> body sequence option
 %type  <pList> props
 %type  <pCostFormula> cformula
+%type  <pTctlFormula> tctl
 
 %token	ASSERT PRINT PRINTM
 %token	C_CODE C_DECL C_EXPR C_STATE C_TRACK
@@ -97,8 +104,36 @@ extern int nbrLines;
 %%
 
 start_parsing	: program						/* dealt with locally */ 
-				| props							{ if(property) *property = $1;}
-                | CHECK cformula program        { if(property) *property = $2;}
+				| props							{
+#ifdef CLOCK
+												yyerror("Property lists are not supported by this CLOCK parser.");
+#else
+												if(property) *property = $1;
+#endif
+											}
+                | CHECK cformula program        {
+#ifdef CLOCK
+												yyerror("CORA cost formulas are not TCTL properties.");
+#else
+												if(property) *property = $2;
+#endif
+											}
+				| SPEC tctl program				{
+#ifdef CLOCK
+												if(property) *property = $2;
+#else
+												yyerror("TCTL properties require the CLOCK option.");
+#endif
+											}
+				;
+
+tctl		: EVENTUALLY FINALLY '(' LE CONST ')' expr {
+#ifdef CLOCK
+												$$ = createTctlFormula(CTL_EF, NULL, $5, $7);
+#else
+												$$ = NULL;
+#endif
+											}
 				;
 
 cformula        : FINALLY prop WITHIN CONST     { $$ = createCostFormula($2, $4, INT_MAX, INT_MAX);}
@@ -154,7 +189,11 @@ sfld_	: /* empty */							{ $$ = NULL; }
 /** PROMELA Grammar Rules **/
 
 
-program	: units									/* dealt with locally */
+program	: units									{
+#ifdef CLOCK
+											if(_clocks) encodeClocks(_clocks);
+#endif
+											}
 		;
 
 units	: unit									/* dealt with locally */ 
@@ -316,6 +355,22 @@ step    : one_decl								{ $$ = createExpNode(E_DECL, NULL, 0, NULL, NULL, NULL
 		;
 
 timed_stmnt	: WAIT '(' expr ')' THEN stmnt		{ $$ = createExpNode(E_STMNT_WHEN, NULL, 0, $3, $6, NULL, nbrLines, NULL, NULL); }
+			| WHILE '(' expr ')' WAIT			{
+#ifdef CLOCK
+											$$ = createExpNode(E_STMNT_WAIT, NULL, 0, $3, NULL, NULL, nbrLines, NULL, NULL);
+#else
+											yyerror("Clock invariants require the CLOCK option.");
+											$$ = NULL;
+#endif
+										}
+			| WHEN '(' expr ')' DO Stmnt		{
+#ifdef CLOCK
+											$$ = createExpNode(E_STMNT_WHEN, NULL, 0, $3, $6, NULL, nbrLines, NULL, NULL);
+#else
+											yyerror("Clock guards require the CLOCK option.");
+											$$ = NULL;
+#endif
+										}
 			;
 
 nf_stmnt    : cost_stmnt                        { $$ = createExpNode(E_STMNT_NF, NULL, 0, $1, NULL, NULL, nbrLines, NULL, NULL); }
@@ -343,11 +398,14 @@ one_decl: vis TYPE var_list						{	ptSymTabNode cur = $3;
 													while(cur != NULL) {
 														// If type != 0, then the var is a T_CHAN
 														if(cur->type == 0) cur->type = $2;
-#ifndef CLOCK
-														if(cur->type == T_CLOCK) {
-															yyerror("Clocks can only be declared when the CLOCK option is enabled.");
-														}
+												if(cur->type == T_CLOCK) {
+#ifdef CLOCK
+													if(!_clocks) _clocks = listAdd(NULL, GLOBAL_CLOCK);
+													_clocks = listAdd(_clocks, cur->name);
+#else
+													yyerror("Clocks can only be declared when the CLOCK option is enabled.");
 #endif
+												}
 														cur = cur->next;
 													}
 													$$ = $3;

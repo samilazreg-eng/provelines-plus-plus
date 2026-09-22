@@ -13,6 +13,10 @@
 #include "tvl.h"
 #include "symbols.h"
 #include "costFormula.h"
+#ifdef CLOCK
+#include "clockZone.h"
+#include "tctl.h"
+#endif
 #include "automata.h"
 #include "fdg.h"
 #include "state.h"
@@ -50,6 +54,9 @@ ptSymTabNode neverClaim;
 ptList props, props2;
 void * _handshake_transit = NULL;
 ptCostFormula costFormula = NULL;
+#ifdef CLOCK
+ptTctlFormula tctlProperty = NULL;
+#endif
 
 // Profiler variables
 struct timeval _profileTimeBegin, _profileTimeEnd;
@@ -309,7 +316,11 @@ int main(int argc, char *argv[]) {
 
 	void *parsedProperty = NULL;
 	int parseResult = yyparse(&globalSymTab, &mtypes, &parsedProperty);
+#ifdef CLOCK
+	tctlProperty = parsedProperty;
+#else
 	costFormula = parsedProperty;
+#endif
 	if(parseResult != 0) printf("Syntax error; aborting..\n");
 	else {
 #ifdef DEBUG
@@ -326,6 +337,12 @@ int main(int argc, char *argv[]) {
             //printExpression(costFormula->property);
             
         }
+#ifdef CLOCK
+		if(tctlProperty) {
+			resolveVariableNamesInExpression(tctlProperty->property, globalSymTab, mtypes, NULL, NULL);
+			if(check) failure("CLOCK/TCTL property parsed, but the zone-based checker is not connected.\n");
+		}
+#endif
 #ifdef DEBUG
 		printf("Processed variables.\n");
 #endif

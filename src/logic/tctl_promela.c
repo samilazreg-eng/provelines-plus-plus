@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include "error.h"
 #include "main.h"
 #include "list.h"
 #include "clockZone.h"
